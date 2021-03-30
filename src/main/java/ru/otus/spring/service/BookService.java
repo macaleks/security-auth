@@ -1,7 +1,7 @@
-package ru.otus.mvc.service;
+package ru.otus.spring.service;
 
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
-import ru.otus.mvc.model.Book;
+
+import ru.otus.spring.model.Book;
 
 import java.util.List;
 

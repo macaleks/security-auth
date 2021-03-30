@@ -1,13 +1,14 @@
-package ru.otus.mvc.controller;
+package ru.otus.spring.controller;
 
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.otus.mvc.model.Book;
-import ru.otus.mvc.service.BookService;
+import ru.otus.spring.model.Book;
+import ru.otus.spring.service.BookService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -28,6 +29,10 @@ public class BookControllerTest {
 
     Book book = new Book(1, "name", "author", "genre");
 
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @Test
     public void testGetEdit() throws Exception {
         given(service.getBook(1)).willReturn(book);
@@ -35,6 +40,10 @@ public class BookControllerTest {
         verify(service).getBook(1);
     }
 
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @Test
     public void testPostEdit() throws Exception {
         when(service.save(any())).thenReturn(book);
@@ -42,6 +51,10 @@ public class BookControllerTest {
                 .andExpect(redirectedUrl("/edit?id=1"));
     }
 
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @Test
     public void testGetDelete() throws Exception {
         given(service.getBook(1)).willReturn(book);
@@ -49,6 +62,10 @@ public class BookControllerTest {
         verify(service).getBook(1);
     }
 
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @Test
     public void testPostDelete() throws Exception {
         doNothing().when(service).deleteBook(1);
@@ -57,6 +74,10 @@ public class BookControllerTest {
         verify(service).deleteBook(1);
     }
 
+    @WithMockUser(
+            username = "admin",
+            authorities = {"ROLE_ADMIN"}
+    )
     @Test
     public void testMain() throws Exception {
         mvc.perform(get("/")).andExpect(status().isOk());

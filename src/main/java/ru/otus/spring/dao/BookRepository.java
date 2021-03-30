@@ -1,8 +1,8 @@
-package ru.otus.mvc.dao;
+package ru.otus.spring.dao;
+
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-import ru.otus.mvc.model.Book;
+import ru.otus.spring.model.Book;
 
 import java.util.List;
 

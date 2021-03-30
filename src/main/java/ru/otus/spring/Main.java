@@ -1,13 +1,16 @@
-package ru.otus.mvc;
+package ru.otus.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import ru.otus.mvc.model.Book;
-import ru.otus.mvc.service.BookService;
+import org.springframework.context.annotation.Bean;
+import ru.otus.spring.model.Book;
+import ru.otus.spring.security.user.User;
+import ru.otus.spring.service.BookService;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class Main {
@@ -16,7 +19,7 @@ public class Main {
     private BookService service;
 
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(Main.class);
+        SpringApplication.run(Main.class);
     }
 
     @PostConstruct
@@ -25,5 +28,10 @@ public class Main {
         service.save(new Book("name2", "author2", "genre2"));
         service.save(new Book("name3", "author3", "genre3"));
         service.save(new Book("name4", "author4", "genre4"));
+    }
+
+    @Bean
+    public List<User> users() {
+        return Arrays.asList(new User("reader1", "ps144"), new User("reader2", "psp223"), new User("admin", "admin"));
     }
 }

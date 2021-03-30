@@ -1,4 +1,4 @@
-package ru.otus.mvc.model;
+package ru.otus.spring.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

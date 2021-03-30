@@ -1,6 +1,9 @@
-package ru.otus.mvc.controller;
+package ru.otus.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -8,8 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.otus.mvc.model.Book;
-import ru.otus.mvc.service.BookService;
+import ru.otus.spring.model.Book;
+import ru.otus.spring.service.BookService;
+
 
 import java.util.List;
 
@@ -25,6 +29,8 @@ public class BookController {
 
     @GetMapping("/")
     public String mainPage(Model model) {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
         List<Book> books = bookService.findAll();
         model.addAttribute("books", books);
         return "main";
